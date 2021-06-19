@@ -81,7 +81,7 @@ async function gameRule(){
             playing();
         }
     }
-
+}
 
 async function playing(){
     controller.controlDirections(actual_direction, player_data.bodyDirections);
