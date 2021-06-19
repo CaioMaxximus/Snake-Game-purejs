@@ -1,9 +1,9 @@
-const render = {initialRender : function(game_table_data){
+const render = {gameRender : function(game_table_data){
         let gradeGame = ""
         for(var i = 0 ; i <= 10; i++){
             var line = ""
             for (var j = 0 ; j <= 10 ; j ++){
-                line +=  `<div id = 'pixel-game' style ='backgorund-color : ${game_table_data[i][j]}'>A</div> `;
+                line +=  `<div id = 'pixel-game' style ='background-color : ${game_table_data[i][j]}'></div> `;
             }
             gradeGame+= `<div id = 'line-game'>${line}</div>`;
         }
@@ -12,7 +12,6 @@ const render = {initialRender : function(game_table_data){
         // template_game.getElementById("in-game").innerHtml = gradeGame;
         // documents.getElementById("templates").innerHtml = template_game;
         document.getElementById("templates").innerHTML = gradeGame;
-        console.log(gradeGame);
     }
 
     // onchangeRender:  function(){
