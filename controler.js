@@ -13,14 +13,16 @@ const controller = {
 
     controlDirections: function (direction, actualDirections) {
 
-        actualDirections[0] = direction;
         console.log(actualDirections , direction);
         for (let index = actualDirections.length - 1; index > 0; index--) {
             //A penútima posição será a da anterior e assim seguinte
+            console.log(index);
             let frontPos = actualDirections[index - 1];
-            actualDirections[index] = actualDirections[frontPos];
+            actualDirections[index] = frontPos;
 
         }
+        actualDirections[0] = direction;
+
         console.log(actualDirections , direction);
 
 
@@ -30,7 +32,7 @@ const controller = {
         console.log(actualPositions);
         for (let index = 0; index < actualPositions.length; index++) {
             const dir = actualDirections[index];
-            console.log(dir);
+            console.log("pos e direcao..",actualPositions[index] , dir);
             switch (dir) {
                 case ("up"):
                     actualPositions[index] = moveUp(actualPositions[index]);

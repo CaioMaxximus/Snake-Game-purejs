@@ -2,6 +2,9 @@ import  {render} from './renderScreen.js';
 import {controller} from './controler.js';
 import {test} from './testControler.js ';
 
+const game_velocity = 500;
+const game_size = 10;
+
 let game_table_data = [];
 const keys_enum = {
     'w' : 'up', 
@@ -9,14 +12,13 @@ const keys_enum = {
     'd' : 'rt',
     's' : 'dw'
 };
-let actual_direction = "lf";
+let actual_direction = "up";
 let player_data = {
-    body : [[5,5], [5,4]],  
+    body : [[game_size/2,game_size/2], [game_size/2,game_size/2 + 1]],  
     bodyDirections : ["lf","lf"]
 };
 
 let inGame = true;
-const game_size = 10;
 
 
 window.onload = function (){
@@ -24,22 +26,27 @@ window.onload = function (){
     console.log("Carregando a tabela inicial do jogo", game_table_data);
     let $play_link = document.getElementById("play-game");
     $play_link.addEventListener("click" , start_game);
-    test();
 };
 
 function change_direction(key){
     let r = keys_enum[key];
     if(r !== undefined){
-        actual_direction = r;
+        if(r === "lf" && actual_direction !== "rt" || 
+        r === "rt" && actual_direction !== "lf" ||
+        r === "up" && actual_direction !== "dw" ||
+        r === "dw" && actual_direction !== "up"){
+            actual_direction = r;
+
+        }
     }
-    console.log("chaged" , key);
+    console.log("changed" , key);
     
 }
 
 function load_game_area(){
-    for(var i = 0 ; i <= 10; i++){
+    for(var i = 0 ; i < game_size; i++){
         var line = [];
-        for (var j = 0 ; j <= 10 ; j ++){
+        for (var j = 0 ; j < game_size ; j ++){
             line.push("white");
         }
         game_table_data.push(line);
@@ -51,6 +58,7 @@ function start_game(){
     controller.bind_keyboards(change_direction);
     gameRule();
 }
+
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
  }
@@ -75,8 +83,9 @@ function setGameTable(){
 async function gameRule(){
     while(true){
         console.log("game_rule");
+        
         if(inGame){
-            await sleep(500);
+            await sleep(game_velocity);
             playing();
         }
     }

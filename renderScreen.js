@@ -1,8 +1,9 @@
 const render = {gameRender : function(game_table_data){
         let gradeGame = ""
-        for(var i = 0 ; i <= 10; i++){
+        const size = game_table_data.length;
+        for(var i = 0 ; i < size; i++){
             var line = ""
-            for (var j = 0 ; j <= 10 ; j ++){
+            for (var j = 0 ; j < size ; j ++){
                 line +=  `<div id = 'pixel-game' style ='background-color : ${game_table_data[i][j]}'></div> `;
             }
             gradeGame+= `<div id = 'line-game'>${line}</div>`;
