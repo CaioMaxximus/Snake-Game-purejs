@@ -1,101 +1,115 @@
-import  {render} from './renderScreen.js';
-import {controller} from './controler.js';
-import {test} from './testControler.js ';
+import { render } from './renderScreen.js';
+import { controller } from './controler.js';
+import { test } from './testControler.js ';
 
-const game_velocity = 500;
+import { pixel } from './PixelObserver.js';
+
+const game_velocity = 300;
 const game_size = 10;
 
 let game_table_data = [];
 const keys_enum = {
-    'w' : 'up', 
-    'a' : 'lf',
-    'd' : 'rt',
-    's' : 'dw'
+    'w': 'up',
+    'a': 'lf',
+    'd': 'rt',
+    's': 'dw'
 };
 let actual_direction = "up";
 let player_data = {
-    body : [[game_size/2,game_size/2], [game_size/2,game_size/2 + 1]],  
-    bodyDirections : ["lf","lf"]
+    body: [[game_size / 2, game_size / 2], [game_size / 2, game_size / 2 + 1]],
+    bodyDirections: ["lf", "lf"]
 };
 
 let inGame = true;
 
 
-window.onload = function (){
+window.onload = function () {
     load_game_area();
     console.log("Carregando a tabela inicial do jogo", game_table_data);
     let $play_link = document.getElementById("play-game");
-    $play_link.addEventListener("click" , start_game);
+    $play_link.addEventListener("click", start_game);
 };
 
-function change_direction(key){
+function change_direction(key) {
     let r = keys_enum[key];
-    if(r !== undefined){
-        if(r === "lf" && actual_direction !== "rt" || 
-        r === "rt" && actual_direction !== "lf" ||
-        r === "up" && actual_direction !== "dw" ||
-        r === "dw" && actual_direction !== "up"){
+    if (r !== undefined) {
+        if (r === "lf" && actual_direction !== "rt" ||
+            r === "rt" && actual_direction !== "lf" ||
+            r === "up" && actual_direction !== "dw" ||
+            r === "dw" && actual_direction !== "up") {
             actual_direction = r;
 
         }
     }
-    console.log("changed" , key);
-    
+    console.log("changed", key);
+
 }
 
-function load_game_area(){
-    for(var i = 0 ; i < game_size; i++){
+function load_game_area() {
+    for (var i = 0; i < game_size; i++) {
         var line = [];
-        for (var j = 0 ; j < game_size ; j ++){
-            line.push("white");
+        for (var j = 0; j < game_size; j++) {
+            let pixelP = new pixel(String(i) + String(j), "white");
+            line.push(pixelP);
         }
         game_table_data.push(line);
     }
 }
 
-function start_game(){
+function start_game() {
     console.log("start")
     controller.bind_keyboards(change_direction);
+    render.gameRender(game_table_data);
     gameRule();
 }
 
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
- }
-
-function setGameTable(){
-
-    for (var index = 0; index < game_size; index++) {
-        for (let j = 0; j < game_size; j++) {
-            game_table_data[index][j] = "white";
-        }
-    }
-    const player_body =  player_data.body;
-    for (var index = 0; index < player_body.length; index++) {
-        var x = player_body[index][0];
-        var y = player_body[index][1];
-        game_table_data[x][y] = "red";
-        
-    }
-
 }
 
-async function gameRule(){
-    while(true){
+// function verifyStatus(player_position) {
+//     const y = player_position[0][0];
+//     const x = player_position[0][1];
+
+//     console.log( "verify_status",y, x);
+
+//     if (x < 0 || x >= game_size || y < 0 || y >= game_size) {
+//         console.log("perdeu", y, x);
+//         return false;
+
+//     }
+//     return true;
+// }
+
+
+async function gameRule() {
+    while (true) {
         console.log("game_rule");
-        
-        if(inGame){
+
+        if (inGame) {
             await sleep(game_velocity);
             playing();
         }
+        else {
+            window.alert("VOCE PERDEU....");
+            break;
+
+        }
     }
 }
 
-async function playing(){
+async function playing() {
     console.log("playing");
     controller.controlDirections(actual_direction, player_data.bodyDirections);
-    controller.moveSnake(player_data.body , player_data.bodyDirections);
-    setGameTable();
-    render.gameRender(game_table_data);
+    try{
+        controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
+
+    }catch (e){
+        inGame= false;
+    }
+
+    //setGameTable();
+    //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
+    // render.gameRender(game_table_data);
     console.log(player_data.bodyDirections);
 }
