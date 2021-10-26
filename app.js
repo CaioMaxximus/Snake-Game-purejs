@@ -6,6 +6,7 @@ import { pixel } from './PixelObserver.js';
 
 const game_velocity = 300;
 const game_size = 10;
+let time = 0;
 
 let game_table_data = [];
 const keys_enum = {
@@ -60,7 +61,7 @@ function start_game() {
     console.log("start")
     controller.bind_keyboards(change_direction);
     render.gameRender(game_table_data);
-    gameRule();
+    gameCycle();
 }
 
 function sleep(milliseconds) {
@@ -82,9 +83,10 @@ function sleep(milliseconds) {
 // }
 
 
-async function gameRule() {
+async function gameCycle() {
     while (true) {
         console.log("game_rule");
+        console.log(time);
 
         if (inGame) {
             await sleep(game_velocity);
@@ -98,16 +100,51 @@ async function gameRule() {
     }
 }
 
-async function playing() {
+function gameRule(oldBody, newBody) {
+    const result = verifyPositions(newBody);
+
+    switch (result) {
+        case ("out_of_bounds"):
+            inGame = false;
+            break;
+        case ("colision"):
+            render.notify(oldBody, "white", game_table_data);
+            render.notify(newBody, "red", game_table_data);
+            inGame = false;
+            break;
+        case ("ok"):
+            time += 1;
+            render.notify(oldBody, "white", game_table_data);
+            render.notify(newBody, "red", game_table_data);
+            break;
+        }
+}
+
+function verifyPositions(positions) {
+    let x = positions[0][1];
+    let y = positions[0][0];
+    if (x < 0 || x >= game_table_data.length || y < 0 || y >= game_table_data.length) {
+        return "out_of_bounds";
+    }
+    console.log(positions , "positions");
+    positions.forEach(e => {
+        let x1 = e[1];
+        let y1 = e[0];
+        if (x1 === x && y1 === y) {
+            return "colision";
+        }
+    });
+    return "ok";
+}
+
+function playing() {
     console.log("playing");
     controller.controlDirections(actual_direction, player_data.bodyDirections);
-    try{
-        controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
-
-    }catch (e){
-        inGame= false;
-    }
-
+    const bodyCopy = [];
+    Object.assign(bodyCopy, player_data.body);
+    console.log(bodyCopy, "bodyCopy");
+    controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
+    gameRule(bodyCopy, player_data.body);
     //setGameTable();
     //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
     // render.gameRender(game_table_data);

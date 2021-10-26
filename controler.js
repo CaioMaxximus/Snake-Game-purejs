@@ -32,10 +32,10 @@ const controller = {
         console.log(actualPositions);
         for (let index = 0; index < actualPositions.length; index++) {
             const dir = actualDirections[index];
-            console.log("pos e direcao..", actualPositions[index], dir);
-            let x = actualPositions[index][1];
-            let y = actualPositions[index][0];
-            game_table_data[y][x].notify("white");
+            // console.log("pos e direcao..", actualPositions[index], dir);
+            // let x = actualPositions[index][1];
+            // let y = actualPositions[index][0];
+            // game_table_data[y][x].notify("white");
             switch (dir) {
                 case ("up"):
                     actualPositions[index] = moveUp(actualPositions[index]);
@@ -52,15 +52,15 @@ const controller = {
                     break;
 
             }
-            x = actualPositions[index][1];
-            y = actualPositions[index][0];
-            if (x < 0 || x >= game_table_data.length || y < 0 || y >= game_table_data.length) {
-                throw "Posicao inválida"
-            } else {
-                x = actualPositions[index][1];
-                y = actualPositions[index][0];
-                game_table_data[y][x].notify("red");
-            }
+            // x = actualPositions[index][1];
+            // y = actualPositions[index][0];
+            // if (x < 0 || x >= game_table_data.length || y < 0 || y >= game_table_data.length) {
+            //     throw "Posicao inválida"
+            // } else {
+            //     x = actualPositions[index][1];
+            //     y = actualPositions[index][0];
+            //     game_table_data[y][x].notify("red");
+            // }
 
 
         } console.log("Posicoes depois de moverse ", actualPositions);

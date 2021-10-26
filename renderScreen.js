@@ -13,6 +13,14 @@ const render = {gameRender : function(game_table_data){
         // template_game.getElementById("in-game").innerHtml = gradeGame;
         // documents.getElementById("templates").innerHtml = template_game;
         document.getElementById("templates").innerHTML = gradeGame;
+    },
+     notify: function (list , color, game_table_data) {
+        console.log(list);
+        list.forEach(element => {
+            let x = element[1];
+            let y = element[0];
+            game_table_data[y][x].notify(color) ;
+        });
     }
 
     // onchangeRender:  function(){
