@@ -1,12 +1,12 @@
 import { render } from './renderScreen.js';
 import { controller } from './controler.js';
 import { test } from './testControler.js ';
-
+import { generator } from './elementsGenerator.js';
 import { pixel } from './PixelObserver.js';
 
 const game_velocity = 300;
 const game_size = 10;
-let time = 0;
+let points = 0;
 
 let game_table_data = [];
 const keys_enum = {
@@ -20,8 +20,10 @@ let player_data = {
     body: [[game_size / 2, game_size / 2], [game_size / 2, game_size / 2 + 1]],
     bodyDirections: ["lf", "lf"]
 };
+let redDots = [0,0];
 
 let inGame = true;
+let pointed = true;
 
 
 window.onload = function () {
@@ -86,7 +88,8 @@ function sleep(milliseconds) {
 async function gameCycle() {
     while (true) {
         console.log("game_rule");
-        console.log(time);
+        console.log(points
+);
 
         if (inGame) {
             await sleep(game_velocity);
@@ -100,8 +103,8 @@ async function gameCycle() {
     }
 }
 
-function gameRule(oldBody, newBody) {
-    const result = verifyPositions(newBody);
+function gameRule(oldBody, newBody ,redDots) {
+    const result = verifyColision(newBody);
 
     switch (result) {
         case ("out_of_bounds"):
@@ -113,14 +116,30 @@ function gameRule(oldBody, newBody) {
             inGame = false;
             break;
         case ("ok"):
-            time += 1;
+            if(verifyPointsAquired(newBody,redDots)){
+                pointed = true;
+                points += 1;
+
+            };
             render.notify(oldBody, "white", game_table_data);
             render.notify(newBody, "red", game_table_data);
             break;
         }
 }
 
-function verifyPositions(positions) {
+
+function verifyPointsAquired(newBody , redDots){
+
+    let x = newBody[0][1];
+    let y = newBody[0][1];
+
+    if(redDots[0] === x && redDots[1] === y){
+        return true;
+    } 
+    return false;
+}
+
+function verifyColision(positions) {
     let x = positions[0][1];
     let y = positions[0][0];
     if (x < 0 || x >= game_table_data.length || y < 0 || y >= game_table_data.length) {
@@ -144,7 +163,12 @@ function playing() {
     Object.assign(bodyCopy, player_data.body);
     console.log(bodyCopy, "bodyCopy");
     controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
-    gameRule(bodyCopy, player_data.body);
+    if( pointed){
+        redDots = generator.redDotsGenerator(game_table_data);
+        render.notify([redDots],"pink", game_table_data);   
+        pointed = false;
+    }
+    gameRule(bodyCopy, player_data.body,redDots);
     //setGameTable();
     //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
     // render.gameRender(game_table_data);
