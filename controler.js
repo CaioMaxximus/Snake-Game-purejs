@@ -28,7 +28,7 @@ const controller = {
 
     },
 
-    moveSnake: function (actualPositions, actualDirections, game_table_data) {
+    moveSnake: function (actualPositions, actualDirections) {
         console.log(actualPositions);
         for (let index = 0; index < actualPositions.length; index++) {
             const dir = actualDirections[index];
@@ -52,16 +52,6 @@ const controller = {
                     break;
 
             }
-            // x = actualPositions[index][1];
-            // y = actualPositions[index][0];
-            // if (x < 0 || x >= game_table_data.length || y < 0 || y >= game_table_data.length) {
-            //     throw "Posicao inválida"
-            // } else {
-            //     x = actualPositions[index][1];
-            //     y = actualPositions[index][0];
-            //     game_table_data[y][x].notify("red");
-            // }
-
 
         } console.log("Posicoes depois de moverse ", actualPositions);
 

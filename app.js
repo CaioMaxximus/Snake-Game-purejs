@@ -66,23 +66,17 @@ function start_game() {
     gameCycle();
 }
 
+
+function render_frame(oldBody , newBody,  game_table_data , pinkDot){
+    render.notify(oldBody, "white", game_table_data);
+    render.notify(newBody, "red", game_table_data);
+    render.notify([redDots],"pink", game_table_data);   
+
+}
+
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
-
-// function verifyStatus(player_position) {
-//     const y = player_position[0][0];
-//     const x = player_position[0][1];
-
-//     console.log( "verify_status",y, x);
-
-//     if (x < 0 || x >= game_size || y < 0 || y >= game_size) {
-//         console.log("perdeu", y, x);
-//         return false;
-
-//     }
-//     return true;
-// }
 
 
 async function gameCycle() {
@@ -103,7 +97,7 @@ async function gameCycle() {
     }
 }
 
-function gameRule(oldBody, newBody ,redDots) {
+function gameRule( newBody ,redDots) {
     const result = verifyColision(newBody);
 
     switch (result) {
@@ -111,8 +105,7 @@ function gameRule(oldBody, newBody ,redDots) {
             inGame = false;
             break;
         case ("colision"):
-            render.notify(oldBody, "white", game_table_data);
-            render.notify(newBody, "red", game_table_data);
+
             inGame = false;
             break;
         case ("ok"):
@@ -120,20 +113,19 @@ function gameRule(oldBody, newBody ,redDots) {
                 pointed = true;
                 points += 1;
 
-            };
-            render.notify(oldBody, "white", game_table_data);
-            render.notify(newBody, "red", game_table_data);
+            }
             break;
         }
 }
 
 
-function verifyPointsAquired(newBody , redDots){
+function verifyPointsAquired(playerBody , redDots){
 
-    let x = newBody[0][1];
-    let y = newBody[0][1];
+    let x = playerBody[0][1];
+    let y = playerBody[0][0];
 
-    if(redDots[0] === x && redDots[1] === y){
+
+    if(redDots[0] === y && redDots[1] === x){
         return true;
     } 
     return false;
@@ -163,12 +155,13 @@ function playing() {
     Object.assign(bodyCopy, player_data.body);
     console.log(bodyCopy, "bodyCopy");
     controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
+    gameRule(player_data.body,redDots);
     if( pointed){
-        redDots = generator.redDotsGenerator(game_table_data);
-        render.notify([redDots],"pink", game_table_data);   
+        redDots = generator.redDotsGenerator(player_data.body ,game_size);
         pointed = false;
+    }if(inGame){
+        render_frame(bodyCopy , player_data.body ,game_table_data , redDots);
     }
-    gameRule(bodyCopy, player_data.body,redDots);
     //setGameTable();
     //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
     // render.gameRender(game_table_data);
