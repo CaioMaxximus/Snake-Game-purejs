@@ -23,7 +23,7 @@ let player_data = {
 let redDots = [0,0];
 
 let inGame = true;
-let pointed = true;
+let pointed = false;
 
 
 window.onload = function () {
@@ -62,12 +62,13 @@ function load_game_area() {
 function start_game() {
     console.log("start")
     controller.bind_keyboards(change_direction);
+    redDots = generator.redDotsGenerator(player_data.body ,game_size);
     render.gameRender(game_table_data);
     gameCycle();
 }
 
 
-function render_frame(oldBody , newBody,  game_table_data , pinkDot){
+function render_frame(oldBody , newBody,  game_table_data ){
     render.notify(oldBody, "white", game_table_data);
     render.notify(newBody, "red", game_table_data);
     render.notify([redDots],"pink", game_table_data);   
@@ -112,7 +113,7 @@ function gameRule( newBody ,redDots) {
             if(verifyPointsAquired(newBody,redDots)){
                 pointed = true;
                 points += 1;
-
+                
             }
             break;
         }
@@ -148,15 +149,34 @@ function verifyColision(positions) {
     return "ok";
 }
 
+function addNewBodyPart(player_data_old , player_data){
+
+    let body = player_data_old.body; // player body before moving
+    let directions = player_data_old.bodyDirections; // player directions before moving
+    let index = body.length - 1;
+    console.log(String((body)));
+    console.log(String(player_data.body));
+    alert("parou");
+    player_data.body.push(body[index]);
+    player_data.bodyDirections.push(directions[index]);
+
+}
+
 function playing() {
     console.log("playing");
     controller.controlDirections(actual_direction, player_data.bodyDirections);
-    const bodyCopy = [];
-    Object.assign(bodyCopy, player_data.body);
-    console.log(bodyCopy, "bodyCopy");
+    const bodyCopy =  JSON.parse(JSON.stringify(player_data.body));
+    const playerDataCopy = JSON.parse(JSON.stringify(player_data));
+    console.log(String(playerDataCopy.body));
+    console.log(String(player_data.body));
     controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
     gameRule(player_data.body,redDots);
     if( pointed){
+        console.log(playerDataCopy === player_data);
+        alert("pointed!");
+        console.log(String(playerDataCopy.body));
+        console.log(String(player_data.body));
+        addNewBodyPart(playerDataCopy, player_data);
         redDots = generator.redDotsGenerator(player_data.body ,game_size);
         pointed = false;
     }if(inGame){
