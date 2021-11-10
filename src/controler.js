@@ -94,4 +94,4 @@ function keyPressed(evt) {
     return String.fromCharCode(key);
 }
 
-export { controller };
+export {controller} ;

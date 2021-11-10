@@ -1,4 +1,5 @@
-function pixel(id ,color) {
+
+const pixel = function pixel(id ,color) {
     const myId = id;
     let myColor = color;
     return {
@@ -17,4 +18,4 @@ function pixel(id ,color) {
     }
 };
 
-export { pixel };
+export {pixel} ;

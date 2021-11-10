@@ -27,4 +27,4 @@ const render = {gameRender : function(game_table_data){
 
     // }
 }
-export {render};
+export  {render};
