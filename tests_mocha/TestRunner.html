@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
 
-</head>
-<!-- <script type="module">
-    console.log("aqui")
-    let count = 0
-    while (true) {
-        await new Promise(r => setTimeout(r, 1000));
-        count += 1
-        document.getElementById("a").innerText = count;
+    </head>
+    <!-- <script type="module">
+        console.log("aqui")
+        let count = 0
+        while (true) {
+            await new Promise(r => setTimeout(r, 1000));
+            count += 1
+            document.getElementById("a").innerText = count;
 
-    }
-</script> -->
-
-<body>
-    <!-- <div id="a">0</div> -->
-    <div id="mocha"></div>
-
-
-    <!-- Ambiente para inserir o jogo como na aplicacão -->
-    <div id="templates">
-
-    </div>
-    <!-- ocultar a div acima-->
-    <style>
-        #templates {
-            display: none;
         }
-    </style>
-</body>
-<script src="../node_modules/mocha/mocha.js"></script>
-<script src="../node_modules/chai/chai.js"></script>
-<script>
-    mocha.ui('bdd');
-    mocha.reporter('html');
-    var expect = chai.expect;
-</script>
-<script type="module" src="./spec.js"></script>
+    </script> -->
 
-<script>
-    mocha.run();
-</script>
-<script type="module" src="../src/app.js"></script>
+    <body>
+        <!-- <div id="a">0</div> -->
+        <div id="mocha"></div>
+
+
+        <!-- Ambiente para inserir o jogo como na aplicacão -->
+        <div id="templates">x
+
+        </div>
+        <!-- ocultar a div acima-->
+        <style>
+            #templates {
+                display: none;
+            }
+        </style>
+    </body>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script>
+        mocha.setup('bdd');
+        var expect = chai.expect;
+    </script>
+    <script type = module src = "../src/PixelObserver.js"></script>
+    
+    <script  type = "module" src="./spec.js" ></script>
+
+    <script type = "module">
+        mocha.run();
+    </script>
 
 </html>
