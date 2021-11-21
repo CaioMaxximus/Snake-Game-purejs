@@ -8,10 +8,6 @@ const render = {gameRender : function(game_table_data){
             }
             gradeGame+= `<div class = 'line-game'>${line}</div>`;
         }
-    
-        // let template_game = hmtl_templates.getElementById("game_area");
-        // template_game.getElementById("in-game").innerHtml = gradeGame;
-        // documents.getElementById("templates").innerHtml = template_game;
         document.getElementById("templates").innerHTML = gradeGame;
     },
      notify: function (list , color, game_table_data) {
