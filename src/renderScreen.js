@@ -1,4 +1,4 @@
-const render = {gameRender : function(game_table_data){
+const render = {gameRender : function(game_table_data, domContainer =  "templates"){
         let gradeGame = ""
         const size = game_table_data.length;
         for(var i = 0 ; i < size; i++){
@@ -8,7 +8,7 @@ const render = {gameRender : function(game_table_data){
             }
             gradeGame+= `<div class = 'line-game'>${line}</div>`;
         }
-        document.getElementById("templates").innerHTML = gradeGame;
+        document.getElementById(domContainer).innerHTML = gradeGame;
     },
      notify: function (list , color, game_table_data) {
         console.log(list);
