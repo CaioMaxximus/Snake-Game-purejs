@@ -155,7 +155,7 @@ function addNewBodyPart(player_data_old, player_data) {
     let index = body.length - 1;
     console.log(String((body)));
     console.log(String(player_data.body));
-    alert("parou");
+    // alert("parou");
     player_data.body.push(body[index]);
     player_data.bodyDirections.push(directions[index]);
 
@@ -172,7 +172,7 @@ function playing() {
     gameRule(player_data.body, redDots);
     if (pointed) {
         console.log(playerDataCopy === player_data);
-        alert("pointed!");
+        // alert("pointed!");
         console.log(String(playerDataCopy.body));
         console.log(String(player_data.body));
         addNewBodyPart(playerDataCopy, player_data);

@@ -1,4 +1,5 @@
 import { pixel } from "../src/PixelObserver.js"
+import { render } from "../src/renderScreen.js"
 
 describe("Testando pixelObserver", function () {
 
@@ -6,7 +7,7 @@ describe("Testando pixelObserver", function () {
     // console.log("it");  
     let pix = new pixel('00', "green");
 
-    it("Deve lançar uma excecao caso um elemento com cor invalido seja criado",()=>{
+    it("Deve lançar uma excecao caso um elemento com cor invalido seja criado", () => {
         expect(() => new pixel("id", "")).to.throw();
         expect(() => new pixel("id", "---")).to.throw();
         expect(() => new pixel("id", "#00000000000")).to.throw();
@@ -44,13 +45,13 @@ describe("Testando pixelObserver", function () {
         let $ele = document.createElement("div");
         $ele.id = "abc";
         document.getElementById("templates").appendChild($ele);
-        pix = new pixel("abc","");
-        expect(()=>{pix.notify("red")}).to.not.throw();
+        pix = new pixel("abc", "");
+        expect(() => { pix.notify("red") }).to.not.throw();
 
         $ele.remove();
     });
-    it("notify() deve lançar uma execeção se um valor inválido de cor for passado",()=>{
-        
+    it("notify() deve lançar uma execeção se um valor inválido de cor for passado", () => {
+
         let pix = new pixel("00", "");
         let $ele = document.createElement("div");
         $ele.id = "00";
@@ -69,11 +70,58 @@ describe("Testando pixelObserver", function () {
 
 
 describe("Testando renderScreen", function () {
-    it("gameRender() deve gerar um numero de elementos iguas a base * altura da tabela passada como argumento", () => {
-
+    function generateTable(base, altura, cor) {
+        let table = []
+        for (let i = 0; i < altura; i++) {
+            let linha = [];
+            for (let j = 0; j < base; j++) {
+                linha.push(new pixel(String(j) + String(i), cor));
+            }
+            table.push(linha);
+        }
+        return table;
+    }
+    afterEach(()=>{
+       
+        document.getElementById("templates").innerHTML = ""
+        console.log("afterEach");
+        
+    })
+   
+    console.log(generateTable(2, 2, "blue"));
+    describe("gameRender() deve gerar um numero de elementos iguas a base * altura da tabela passada como argumento", () => {
+        it("base e altura diferentes devem ser valores validos", () => {
+            let base = 4;
+            let altura = 1;
+            let table = generateTable(base, altura, "rgb(121,121,121)");
+            render.gameRender(table);
+            console.log()
+            let $base = document.getElementsByClassName("pixel-game").length;
+            let $altura = document.getElementsByClassName("line-game").length;
+            expect($base * $altura).to.be.equal(base * altura);
+        })
+        it("base e/ou altura negativos não devem gerar nada", () => {
+            let base = -4;
+            let altura = 1;
+            let table = generateTable(base, altura, "rgb(121,121,121)");
+            render.gameRender(table);
+            console.log()
+            let $base = document.getElementsByClassName("pixel-game").length;
+            let $altura = document.getElementsByClassName("line-game").length;
+            expect($base * $altura).to.be.equal(0);
+        })
     });
     it("gameRender() deve gerar elementos no DOM com as proriedade cor dos objetos contidos na tabela passada como argumento", () => {
-
+        let base = 2;
+        let altura = 2;
+        let color = "red";
+        let table = generateTable(base, altura, color);
+        render.gameRender(table);
+        console.log()
+        let $ele1 = document.getElementById("00");
+        let $ele2 = document.getElementById("11");
+        expect($ele1.style.backgroundColor).to.be.equal(color);
+        expect($ele2.style.backgroundColor).to.be.equal(color);
     })
 });
 
@@ -91,7 +139,7 @@ describe("Testando controller ", function () {
 })
 
 describe("Testando elementsGenerator", function () {
-    describe("Testando redDotsGenerator",function(){
+    describe("Testando redDotsGenerator", function () {
         it("Deve retornar uma posicao valida da matriz");
         it("Deve nunca deve retornar  uma posicao ocupada pelo player");
     })

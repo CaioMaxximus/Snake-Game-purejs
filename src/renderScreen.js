@@ -11,7 +11,7 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
         document.getElementById(domContainer).innerHTML = gradeGame;
     },
      notify: function (list , color, game_table_data) {
-        console.log(list);
+        console.log(list);  
         list.forEach(element => {
             let x = element[1];
             let y = element[0];
