@@ -61,7 +61,7 @@ function load_game_area() {
 function start_game() {
     console.log("start")
     controller.bind_keyboards(change_direction);
-    redDots = generator.redDotsGenerator(player_data.body, game_size);
+    redDots = generator.redDotsGenerator(player_data.body, game_table_data);
     render.gameRender(game_table_data);
     gameCycle();
 }
@@ -155,7 +155,6 @@ function addNewBodyPart(player_data_old, player_data) {
     let index = body.length - 1;
     console.log(String((body)));
     console.log(String(player_data.body));
-    // alert("parou");
     player_data.body.push(body[index]);
     player_data.bodyDirections.push(directions[index]);
 
@@ -172,11 +171,10 @@ function playing() {
     gameRule(player_data.body, redDots);
     if (pointed) {
         console.log(playerDataCopy === player_data);
-        // alert("pointed!");
         console.log(String(playerDataCopy.body));
         console.log(String(player_data.body));
         addNewBodyPart(playerDataCopy, player_data);
-        redDots = generator.redDotsGenerator(player_data.body, game_size);
+        redDots = generator.redDotsGenerator(player_data.body, game_table_data);
         pointed = false;
     } if (inGame) {
         render_frame(bodyCopy, player_data.body, game_table_data, redDots);

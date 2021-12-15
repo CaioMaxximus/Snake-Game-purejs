@@ -1,5 +1,19 @@
 import { pixel } from "../src/PixelObserver.js"
 import { render } from "../src/renderScreen.js"
+import {generator} from "../src/elementsGenerator.js"
+
+
+function generateTable(base, altura, cor) {
+    let table = []
+    for (let i = 0; i < altura; i++) {
+        let linha = [];
+        for (let j = 0; j < base; j++) {
+            linha.push(new pixel(String(j) + String(i), cor));
+        }
+        table.push(linha);
+    }
+    return table;
+}
 
 describe("Testando pixelObserver", function () {
 
@@ -57,10 +71,10 @@ describe("Testando pixelObserver", function () {
         $ele.id = "00";
         document.getElementById("templates").appendChild($ele);
 
-        expect(pix.notify("")).to.throw();
-        expect(pix.notify()).to.throw();
-        expect(pix.notify("...")).to.throw();
-        expect(pix.notify("rgb(0,0)")).to.throw();
+        expect(()=> pix.notify("")).to.throw();
+        expect(()=> pix.notify()).to.throw();
+        expect(()=> pix.notify("...")).to.throw();
+        expect(()=> pix.notify("rgb(0,0)")).to.throw();
     });
 
 
@@ -70,17 +84,7 @@ describe("Testando pixelObserver", function () {
 
 
 describe("Testando renderScreen", function () {
-    function generateTable(base, altura, cor) {
-        let table = []
-        for (let i = 0; i < altura; i++) {
-            let linha = [];
-            for (let j = 0; j < base; j++) {
-                linha.push(new pixel(String(j) + String(i), cor));
-            }
-            table.push(linha);
-        }
-        return table;
-    }
+    
     afterEach(()=>{
        
         document.getElementById("templates").innerHTML = ""
@@ -139,9 +143,32 @@ describe("Testando controller ", function () {
 })
 
 describe("Testando elementsGenerator", function () {
+
+    function validatePositions(y , x ,pos){
+        pos.forEach(e =>{
+
+            let localY = e[0];
+            let localX = e[1];
+            if(!(localX >= 0  && localX <= x && localY >= 0 && localY <= y)){
+                return false;
+            }
+        })
+        return true;
+
+    }
+
     describe("Testando redDotsGenerator", function () {
-        it("Deve retornar uma posicao valida da matriz");
-        it("Deve nunca deve retornar  uma posicao ocupada pelo player");
+        it("Deve retornar uma posicao valida da matriz", ()=>{
+            let table = generateTable(10, 10, "white");
+            let playerPos = [[0,0], [1,0],[2,0]];
+            let posList = []
+            for (let i  =0 ; i < 1000; i++){
+                let pos =generator.redDotsGenerator(table , playerPos);
+                posList.push(pos);
+            }
+            expect(validatePositions( 10 ,10,posList)).to.be.equal(true);
+        });
+        it("Deve nunca retornar uma posicao ocupada pelo player");
     })
 }
 );
