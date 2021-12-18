@@ -40,6 +40,7 @@ function change_direction(key) {
             r === "up" && actual_direction !== "dw" ||
             r === "dw" && actual_direction !== "up") {
             actual_direction = r;
+            console.log(actual_direction , "changes actualDirection")
 
         }
     }
@@ -62,12 +63,13 @@ function start_game() {
     console.log("start")
     controller.bind_keyboards(change_direction);
     redDots = generator.redDotsGenerator(player_data.body, game_table_data);
+    console.log(redDots);
     render.gameRender(game_table_data);
     gameCycle();
 }
 
 
-function render_frame(oldBody, newBody, game_table_data) {
+function render_frame(oldBody, newBody, game_table_data,redDots) {
     render.notify(oldBody, "white", game_table_data);
     render.notify(newBody, "red", game_table_data);
     render.notify([redDots], "pink", game_table_data);
@@ -138,13 +140,15 @@ function verifyColision(positions) {
         return "out_of_bounds";
     }
     console.log(positions, "positions");
-    positions.forEach(e => {
+
+    for(let i = 1; i < positions.length; i++){
+        let e = positions[i];
         let x1 = e[1];
         let y1 = e[0];
         if (x1 === x && y1 === y) {
             return "colision";
         }
-    });
+    }
     return "ok";
 }
 
@@ -167,7 +171,7 @@ function playing() {
     const playerDataCopy = JSON.parse(JSON.stringify(player_data));
     console.log(String(playerDataCopy.body));
     console.log(String(player_data.body));
-    controller.moveSnake(player_data.body, player_data.bodyDirections, game_table_data);
+    controller.moveSnake(player_data.body, player_data.bodyDirections,);
     gameRule(player_data.body, redDots);
     if (pointed) {
         console.log(playerDataCopy === player_data);

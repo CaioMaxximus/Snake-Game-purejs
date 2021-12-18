@@ -4,7 +4,7 @@ const controller = {
 
 
         let str;
-        document.onkeypress = (event) => {
+        document.onkeyup = (event) => {
             str = keyPressed(event);
             callBackFunc(str);
         };
@@ -44,7 +44,6 @@ const controller = {
                     actualPositions[index] = moveDown(actualPositions[index]);
                     break;
                 case ("lf"):
-                    console.log({ "r : ": moveLeft(actualPositions[index]) })
                     actualPositions[index] = moveLeft(actualPositions[index]);
                     break;
                 case ("rt"):

@@ -15,7 +15,8 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
         list.forEach(element => {
             let x = element[1];
             let y = element[0];
-            game_table_data[y][x].notify(color) ;
+            console.log(game_table_data[x][y]);
+            game_table_data[x][y].notify(color) ;
         });
     }
 

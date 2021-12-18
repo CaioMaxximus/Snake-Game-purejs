@@ -145,14 +145,15 @@ describe("Testando controller ", function () {
 describe("Testando elementsGenerator", function () {
 
     function validatePositions(y , x ,pos){
-        pos.forEach(e =>{
 
+        for(let i = 0; i < pos.length; i++){
+            let e = pos[i];
             let localY = e[0];
             let localX = e[1];
-            if(!(localX >= 0  && localX <= x && localY >= 0 && localY <= y)){
+            if(!(localX >= 0  && localX < x && localY >= 0 && localY < y)){
                 return false;
             }
-        })
+        }
         return true;
 
     }
@@ -162,10 +163,11 @@ describe("Testando elementsGenerator", function () {
             let table = generateTable(10, 10, "white");
             let playerPos = [[0,0], [1,0],[2,0]];
             let posList = []
-            for (let i  =0 ; i < 1000; i++){
-                let pos =generator.redDotsGenerator(table , playerPos);
+            for (let i  =0 ; i < 300; i++){
+                let pos =generator.redDotsGenerator(playerPos,table);
                 posList.push(pos);
             }
+            console.log("posss",pos.indexOf(10));       
             expect(validatePositions( 10 ,10,posList)).to.be.equal(true);
         });
         it("Deve nunca retornar uma posicao ocupada pelo player");
