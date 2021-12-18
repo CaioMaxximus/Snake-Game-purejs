@@ -55,18 +55,10 @@ describe("Testando pixelObserver", function () {
     it("notify() deve lancar uma excecao caso o elemento possua um id invalido", () => {
         let pix = new pixel("ab", "blue");
         expect(() => { pix.notify("rgb(0,0,0)") }).to.throw();
-
-        let $ele = document.createElement("div");
-        $ele.id = "abc";
-        document.getElementById("templates").appendChild($ele);
-        pix = new pixel("abc", "");
-        expect(() => { pix.notify("red") }).to.not.throw();
-
-        $ele.remove();
     });
     it("notify() deve lançar uma execeção se um valor inválido de cor for passado", () => {
 
-        let pix = new pixel("00", "");
+        let pix = new pixel("00", "red");
         let $ele = document.createElement("div");
         $ele.id = "00";
         document.getElementById("templates").appendChild($ele);
@@ -131,7 +123,7 @@ describe("Testando renderScreen", function () {
 
 describe("Testando controller ", function () {
     describe("Testando bind_keyboards", () => {
-        it("Deve chamar a função   de calback ao uma tecla ser pressionada ")
+        it("Deve chamar a função de calback ao uma tecla ser pressionada ")
     });
     describe("Tentando controlDirections", () => {
         it("Deve alterar as direções de forma que o valor de uma posição será igual a anterior e assim por diante")
@@ -167,7 +159,6 @@ describe("Testando elementsGenerator", function () {
                 let pos =generator.redDotsGenerator(playerPos,table);
                 posList.push(pos);
             }
-            console.log("posss",pos.indexOf(10));       
             expect(validatePositions( 10 ,10,posList)).to.be.equal(true);
         });
         it("Deve nunca retornar uma posicao ocupada pelo player");
