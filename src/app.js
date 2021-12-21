@@ -19,8 +19,7 @@ let player_data = {
     body: [[game_size / 2, game_size / 2], [game_size / 2, game_size / 2 + 1]],
     bodyDirections: ["lf", "lf"]
 };
-let redDots = [0, 0];
-
+let redDots = [0, 0];   
 let inGame = true;
 let pointed = false;
 
@@ -33,8 +32,11 @@ window.onload = function () {
 };
 
 function change_direction(key) {
-    let r = keys_enum[key];
+    let r = keys_enum[key.toLowerCase()];
+
+    console.log(r);
     if (r !== undefined) {
+        
         if (r === "lf" && actual_direction !== "rt" ||
             r === "rt" && actual_direction !== "lf" ||
             r === "up" && actual_direction !== "dw" ||
@@ -167,12 +169,15 @@ function addNewBodyPart(player_data_old, player_data) {
 function playing() {
     console.log("playing");
     controller.controlDirections(actual_direction, player_data.bodyDirections);
-    const bodyCopy = JSON.parse(JSON.stringify(player_data.body));
     const playerDataCopy = JSON.parse(JSON.stringify(player_data));
-    console.log(String(playerDataCopy.body));
-    console.log(String(player_data.body));
-    controller.moveSnake(player_data.body, player_data.bodyDirections,);
+    // console.log(String(playerDataCopy.body));
+    // console.log(String(player_data.body));
+    console.log(JSON.stringify(player_data.body))
+    player_data.body =  controller.moveSnake(player_data.body, player_data.bodyDirections);
+    console.log(JSON.stringify(player_data.body))
+
     gameRule(player_data.body, redDots);
+    
     if (pointed) {
         console.log(playerDataCopy === player_data);
         console.log(String(playerDataCopy.body));
@@ -181,7 +186,7 @@ function playing() {
         redDots = generator.redDotsGenerator(player_data.body, game_table_data);
         pointed = false;
     } if (inGame) {
-        render_frame(bodyCopy, player_data.body, game_table_data, redDots);
+        render_frame(playerDataCopy.body, player_data.body, game_table_data, redDots);
     }
     //setGameTable();
     //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);

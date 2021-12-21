@@ -16,7 +16,7 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
             let x = element[1];
             let y = element[0];
             console.log(game_table_data[x][y]);
-            game_table_data[x][y].notify(color) ;
+            game_table_data[y][x].notify(color) ;
         });
     }
 

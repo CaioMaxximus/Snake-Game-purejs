@@ -4,7 +4,7 @@ const controller = {
 
 
         let str;
-        document.onkeyup = (event) => {
+        document.onkeypress = (event) => {
             str = keyPressed(event);
             callBackFunc(str);
         };
@@ -13,7 +13,7 @@ const controller = {
 
     controlDirections: function (direction, actualDirections) {
 
-        console.log(actualDirections, direction);
+        console.log("directions",actualDirections, direction);
         for (let index = actualDirections.length - 1; index > 0; index--) {
             //A penútima posição será a da anterior e assim seguinte
             console.log(index);
@@ -29,15 +29,17 @@ const controller = {
     },
 
     moveSnake: function (actualPositions, actualDirections) {
-        console.log(actualPositions);
+        // console.log(actualPositions);
         for (let index = 0; index < actualPositions.length; index++) {
             const dir = actualDirections[index];
             // console.log("pos e direcao..", actualPositions[index], dir);
             // let x = actualPositions[index][1];
             // let y = actualPositions[index][0];
             // game_table_data[y][x].notify("white");
+      
             switch (dir) {
                 case ("up"):
+                    console.log("cima");
                     actualPositions[index] = moveUp(actualPositions[index]);
                     break;
                 case ("dw"):
@@ -52,8 +54,10 @@ const controller = {
 
             }
 
-        } console.log("Posicoes depois de moverse ", actualPositions);
+        }
+        //  console.log("Posicoes depois de moverse ", actualPositions);
 
+        return actualPositions;
 
     }
 
