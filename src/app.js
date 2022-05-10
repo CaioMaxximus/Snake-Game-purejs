@@ -2,10 +2,10 @@ import { render } from './renderScreen.js';
 import {controller} from './controler.js';
 import { generator } from './elementsGenerator.js';
 import { pixel } from './PixelObserver.js';
-import './fetch.js'; 
+import {getTemplates} from './fetch.js'; 
 
 const game_velocity = 300;
-const game_size = 10;
+const game_size = 10;   
 let points = 0;
 
 let game_table_data = [];
@@ -26,11 +26,11 @@ let pointed = false;
 
 
 window.onload = function () {
-    // load_game_area();
-    // console.log("Carregando a tabela inicial do jogo", game_table_data);
-    // let $play_link = document.getElementById("play-game");
-    // $play_link.addEventListener("click", start_game);
-
+    load_game_area();
+    console.log("Carregando a tabela inicial do jogo", game_table_data);
+    let $play_link = document.getElementById("play-game");
+    $play_link.addEventListener("click", start_game);
+    getTemplates();
 };
 
 function change_direction(key) {
