@@ -4,7 +4,9 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
         for(var i = 0 ; i < size; i++){
             var line = ""
             for (var j = 0 ; j < size ; j ++){
-                line +=  `<div class = 'pixel-game' id = ${game_table_data[i][j].getId()} style ='background-color : ${game_table_data[i][j].getColor()}'></div> `;
+                line +=  `<div class = 'pixel-game' id = ${game_table_data[i][j].getId()} 
+                style ='background-image : url(../heart_icon.png);
+                 background-color : none'></div> `;
             }
             gradeGame+= `<div class = 'line-game'>${line}</div>`;
         }

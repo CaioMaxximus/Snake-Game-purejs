@@ -28,9 +28,9 @@ let pointed = false;
 window.onload = function () {
     load_game_area();
     console.log("Carregando a tabela inicial do jogo", game_table_data);
-    let $play_link = document.getElementById("play-game");
-    $play_link.addEventListener("click", start_game);
     getTemplates();
+    let $play_link = document.getElementById("action-play");
+    $play_link.addEventListener("click", start_game);
 };
 
 function change_direction(key) {
@@ -56,7 +56,7 @@ function load_game_area() {
     for (var i = 0; i < game_size; i++) {
         var line = [];
         for (var j = 0; j < game_size; j++) {
-            let pixelP = new pixel(String(i) + String(j), "white");
+            let pixelP = new pixel(String(i) + String(j), "none");
             line.push(pixelP);
         }
         game_table_data.push(line);
@@ -74,9 +74,9 @@ function start_game() {
 
 
 function render_frame(oldBody, newBody, game_table_data,redDots) {
-    render.notify(oldBody, "white", game_table_data);
-    render.notify(newBody, "red", game_table_data);
-    render.notify([redDots], "pink", game_table_data);
+    render.notify(oldBody, "none", game_table_data);
+    render.notify(newBody, "../heart_icon.png", game_table_data);
+    render.notify([redDots], "../snake-graphics.png", game_table_data);
 
 }
 

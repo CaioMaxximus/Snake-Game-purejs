@@ -2,9 +2,9 @@
 const pixel = function pixel(id, color) {
     const myId = id;
     
-    if(!isColor(color)){
-        throw `Error : Invalid color atribute - ${color}`
-    }
+    // if(!isColor(color)){
+    //     throw `Error : Invalid color atribute - ${color}`
+    // }
     let myColor = color;
 
     function isColor(color){
@@ -22,10 +22,10 @@ const pixel = function pixel(id, color) {
             if(e === null){
                 throw `Error : Element id didn't find in DOM - ${myId}`
             }
-            if(!isColor(color)){
-                throw `Error : Invalid color atribute - ${color}`
-            }
-            e.style.backgroundColor = color;
+            // if(!isColor(color)){
+            //     throw `Error : Invalid color atribute - ${color}`
+            // }
+            e.style.backgroundImage = color;
             myColor = color;
             console.log(myId, "mudando..", color);
         },

@@ -3,6 +3,6 @@
 // .then(data => data.text())
 // .then(html => document.getElementById("templates").innerHTML = html)
 var ajax = new XMLHttpRequest();
-ajax.open("GET", "templates.html", false);
+ajax.open("GET", "src/templates.html", false);
 ajax.send();
-document.getElementById("templates").innerHTML += ajax.responseText;};  
+document.getElementById("templates").innerHTML = ajax.responseText;};  
