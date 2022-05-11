@@ -1,6 +1,9 @@
 body{
     width: 100vw;
     height: 100vh;
+    background-image : url(../heartIcon.png);
+    background-repeat: no-repeat, no-repeat;
+
 }
 
 header{
@@ -22,6 +25,7 @@ header{
 .line-game{
     height: 10%;
     width: 100%;
+    max-width: 300px;
     display: flex;
     flex-direction: row;
 }
@@ -30,8 +34,19 @@ header{
     height: 100%;
     width:  100%;
     font-size: small;
-    border: solid 1px black;
+    background-color: pink;
+    display: flex;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center;
+    background-size: auto    ;
+
+
 }
+
+/* .pixel-background-img{
+    max-height: 100%;
+    max-width: 100%;
+} */
 #footer{
     left: 2rem;
     position: absolute;;

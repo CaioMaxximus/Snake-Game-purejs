@@ -25,7 +25,7 @@ const pixel = function pixel(id, color) {
             // if(!isColor(color)){
             //     throw `Error : Invalid color atribute - ${color}`
             // }
-            e.style.backgroundImage = color;
+            e.style.backgroundImage = `url(${color})`;
             myColor = color;
             console.log(myId, "mudando..", color);
         },

@@ -56,7 +56,7 @@ function load_game_area() {
     for (var i = 0; i < game_size; i++) {
         var line = [];
         for (var j = 0; j < game_size; j++) {
-            let pixelP = new pixel(String(i) + String(j), "none");
+            let pixelP = new pixel(String(i) + String(j), "");
             line.push(pixelP);
         }
         game_table_data.push(line);
@@ -75,8 +75,8 @@ function start_game() {
 
 function render_frame(oldBody, newBody, game_table_data,redDots) {
     render.notify(oldBody, "none", game_table_data);
-    render.notify(newBody, "../heart_icon.png", game_table_data);
-    render.notify([redDots], "../snake-graphics.png", game_table_data);
+    render.notify(newBody, "../snake_body.png", game_table_data);
+    render.notify([redDots], "../heartIcon.png", game_table_data);
 
 }
 
