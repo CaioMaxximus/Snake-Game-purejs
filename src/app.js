@@ -3,9 +3,10 @@ import {controller} from './controler.js';
 import { generator } from './elementsGenerator.js';
 import { pixel } from './PixelObserver.js';
 import {getTemplates} from './fetch.js'; 
+import {templates} from './templates.js'
 
-const game_velocity = 300;
-const game_size = 10;   
+let game_velocity = 300;
+const game_size = 12;   
 let points = 0;
 
 let game_table_data = [];
@@ -28,7 +29,8 @@ let pointed = false;
 window.onload = function () {
     load_game_area();
     console.log("Carregando a tabela inicial do jogo", game_table_data);
-    getTemplates();
+    // getTemplates();
+    document.getElementById("templates").innerHTML = templates.startScreen;
     let $play_link = document.getElementById("action-play");
     $play_link.addEventListener("click", start_game);
 };
@@ -49,6 +51,15 @@ function change_direction(key) {
         }
     }
     console.log("changed", key);
+
+}
+
+function spwanLoseScreen(){
+    document.getElementById("templates").innerHTML = templates.loseScreen;
+    document.getElementById("final-points").innerHTML = points
+}
+
+function spawnWinScreen(){
 
 }
 
@@ -96,7 +107,8 @@ async function gameCycle() {
             playing();
         }
         else {
-            window.alert("VOCE PERDEU....");
+            await sleep(1000);
+            spwanLoseScreen();
             break;
 
         }
@@ -187,12 +199,13 @@ function playing() {
         addNewBodyPart(playerDataCopy, player_data);
         redDots = generator.redDotsGenerator(player_data.body, game_table_data);
         pointed = false;
+        game_velocity -= 15
     } if (inGame) {
         render_frame(playerDataCopy.body, player_data.body, game_table_data, redDots);
     }
     //setGameTable();
     //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
-    // render.gameRender(game_table_data);
+    // render.gameRender(game_table _data);
     console.log(player_data.bodyDirections);
 }
 

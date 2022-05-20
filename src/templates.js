@@ -1,11 +1,7 @@
-<!-- <div id = "game-area">
 
-    <header>h</header>
-    <div id = "in-game"></div>
-    <footer>f</footer>
 
-</div> -->
-<style>
+export const templates = { startScreen :
+`<style>
     :root {
         --color1: #120907;
         --color2: #12253c;
@@ -130,7 +126,9 @@
         animation-iteration-count: infinite;
     }
 
-
+    #action-play:hover{
+        cursor: pointer;
+    }
 
 </style>
 <div id="welcome-area">
@@ -144,4 +142,96 @@
         </div>
     </div>
 
-</div>
+</div>`,
+
+loseScreen : `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+@keyframes change-background-color {
+    0%{
+        background-color: blueviolet;
+    }
+    40%{
+        background-color: red;
+    }
+    100%{
+        background-color: blueviolet;
+    }
+}
+
+#lose-screen{
+    margin: 10%  auto;
+    display: flex;
+    width: 70%;
+    border-radius: 10px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    animation: change-background-color 1s forwards infinite ;
+    color: yellow;
+}
+
+</style>
+<body>
+    <div id = lose-screen>
+        <h1>YOU LOSE!</h1>
+        <h3 id = points> <span id = final-points></span> POINTS</h3>
+
+    </div>
+</body>
+</html>
+`,
+winScreen : `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+@keyframes change-background-color {
+    0%{
+        background-color: blueviolet;
+    }
+    40%{
+        background-color: red;
+    }
+    100%{
+        background-color: blueviolet;
+    }
+}
+
+#win-screen{
+    margin: 10%  auto;
+    display: flex;
+    width: 70%;
+    border-radius: 10px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    animation: change-background-color 1s forwards infinite ;
+    color: yellow;
+}
+
+
+
+</style>
+<body>
+    <div id = win-screen>
+        <h1>CONGRATULATIONS!</h1> 
+        <h2>You Win!</h2> 
+    </div>
+</body>
+</html>
+`
+}

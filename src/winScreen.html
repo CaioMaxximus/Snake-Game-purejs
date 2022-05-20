@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+@keyframes change-background-color {
+    0%{
+        background-color: blueviolet;
+    }
+    40%{
+        background-color: red;
+    }
+    100%{
+        background-color: blueviolet;
+    }
+}
+
+#win-screen{
+    margin: 10%  auto;
+    display: flex;
+    width: 70%;
+    border-radius: 10px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    animation: change-background-color 1s forwards infinite ;
+    color: yellow;
+}
+
+
+
+</style>
+<body>
+    <div id = win-screen>
+        <h1>CONGRATULATIONS!</h1> 
+        <h2>You Win!</h2> 
+    </div>
+</body>
+</html>

@@ -18,27 +18,33 @@ header{
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
 }
 
 .line-game{
-    height: 10%;
+    height: 100%;
     width: 100%;
-    max-width: 300px;
     display: flex;
     flex-direction: row;
+    width: 600px;
+    height: 600px;
+    min-width: 600px;
+    max-width: 600px;
 }
 
 .pixel-game{
     height: 100%;
     width:  100%;
     font-size: small;
+    /* border : solid 1px black; */
     background-color: pink;
     display: flex;
     background-repeat: no-repeat, no-repeat;
     background-position: center;
-    background-size: auto    ;
+    background-size: auto    ;  
 
 
 }
