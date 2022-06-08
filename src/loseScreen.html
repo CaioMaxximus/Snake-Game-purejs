@@ -7,15 +7,21 @@
     <title>Document</title>
 </head>
 <style>
+
+:root{
+    --btn-background: rgb(167, 0, 125);
+    --btn-color : rgb(123, 199, 0);
+}
+
 @keyframes change-background-color {
     0%{
-        background-color: blueviolet;
+        background-color: #9603bb;
     }
     40%{
-        background-color: red;
+        background-color: #2e003b;
     }
     100%{
-        background-color: blueviolet;
+        background-color: #9603bb;
     }
 }
 
@@ -31,12 +37,44 @@
     color: yellow;
 }
 
+.btn-zone{
+    display: flex;
+    flex-direction: column;
+    column-gap: 3em;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-zone button{
+    width: 50%;
+    max-width: 10em;
+    min-height: 4em;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    color: var(--btn-color);
+    background-color: var(--btn-background);
+}
+
+.btn-zone button:hover{
+    border: solid 2px black;
+    color: var(--btn-background);
+    background-color: var(--btn-color);
+}
+
 </style>
 <body>
     <div id = lose-screen>
         <h1>YOU LOSE!</h1>
         <h3 id = points> <span id = final-points></span> POINTS</h3>
-
+        <div class = "btn-zone">
+            <button id="play-again-btn" onclick="">
+                PLAY AGAIN
+            </button>
+            <button id = "go-menu-btn">
+                MENU
+            </button>
+        </div>
     </div>
 </body>
 </html>

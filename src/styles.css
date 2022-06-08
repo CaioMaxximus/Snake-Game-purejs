@@ -1,9 +1,11 @@
+:root{
+    --DarkSlateBlue : #483D8B;
+}
+
 body{
     width: 100vw;
     height: 100vh;
-    background-image : url(../heartIcon.png);
-    background-repeat: no-repeat, no-repeat;
-
+    background-color: var(--DarkSlateBlue);
 }
 
 header{
@@ -22,6 +24,7 @@ header{
     height: 60%;
     align-items: center;
     justify-content: center;
+    border : solid 10px black;
 }
 
 .line-game{
