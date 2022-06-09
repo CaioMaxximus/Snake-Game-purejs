@@ -6,95 +6,123 @@
         --Yellow: #ffff19;
         --animation-time: 1s;
     }
-
-
-
+    
+    
+    
     @keyframes move {
         from {
             transform: translateX(1000px);
         }
-
+    
         to {
             transform: translateX(-1000px);
         }
     }
-
-
+    
+    
+    @keyframes boxShadownMove {
+    
+        0% {
+            box-shadow: 0px -5px 25px 3px purple;
+        }
+    
+        15% {
+            box-shadow: 5px -12px 25px 5px purple;
+        }
+    
+        50% {
+            box-shadow: 10px -17px 25px 5px purple;
+    
+        }
+    
+        65%{
+            box-shadow: 0px 0px 0px 0px purple;
+    
+        }
+        100% {
+            background-color: purple;
+            border-radius: 8px;
+    
+        }
+    }
+    
     @keyframes showBtn {
         from {
             opacity: 0;
-            background-color:rgb(49, 204, 2);
-        }
+            background-color: rgb(49, 204, 2);
+            box-shadow: 0px 0px 30px 30px purple;
 
+        }
+    
         to {
             opacity: 1;
             align-items: center;
         }
     }
-
+    
     @keyframes changeColorBanner {
-
+    
         0% {
             color: var(--BlueViolet);
         }
-
+    
         20% {
             color: var(--DarkOrchid);
         }
-
+    
         40%,
         100% {
             color: var(--Yellow);
         }
-
+    
     }
-
+    
     @keyframes changeColorDois {
-
+    
         0% {
             background-color: var(--Purple);
         }
-
+    
         50% {
             background-color: var(--BlueViolet);
         }
-
+    
         100% {
             background-color: var(--Purple);
-
+    
         }
-
-
+    
+    
     }
-
+    
     @keyframes fadeAppearMenu {
         from {
             opacity: 0;
             box-shadow: 10em 10em 10em 10em black;
-
+    
         }
-
+    
         to {
             opacity: 1;
             box-shadow: none;
-
+    
         }
     }
-
-
+    
+    
     @keyframes esmaecer {
         from {
             background-color: rgba(238, 2, 2, 0.904);
-
+    
         }
-
+    
         100% {
             background-color: none;
         }
     }
-
+    
     #welcome-area {
-
+    
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -110,13 +138,13 @@
         animation-iteration-count: infinite; */
         border-radius: 5px;
     }
-
+    
     /* #welcome-area{
         animation : esmaecer;
         animation-duration: 3s;
         animation-delay:6s;
     } */
-
+    
     #central-area {
         display: grid;
         width: 100%;
@@ -124,22 +152,22 @@
         align-items: center;
         justify-content: center;
     }
-
+    
     #actions {
         opacity: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        animation: showBtn 1s ;
+        animation: showBtn 1s;
         animation-delay: 13s;
         animation-fill-mode: forwards;
     }
-
+    
     #actions-play {
         font-size: 30rem;
-
+    
     }
-
+    
     #actions button {
         border: none;
         color: rgb(157, 233, 15);
@@ -147,10 +175,10 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 3em;
         background: none;
-
+    
     }
-
-
+    
+    
     #banner {
         position: relative;
         display: flex;
@@ -158,16 +186,16 @@
         font-size: 4em;
         animation: changeColorBanner 1.5s 13s 6 backwards,
             changeColorBanner 1s 9s infinite backwards;
-
-
+    
+    
         border-color: #12253c;
     }
-
+    
     #banner h1 {
         margin-bottom: 0px;
         margin-top: 0px;
     }
-
+    
     #snake-image {
         background-color: var(--color1);
         position: absolute;
@@ -177,12 +205,15 @@
         animation-fill-mode: forwards;
         animation-iteration-count: infinite;
     }
-
+    
+    
     #action-play:hover {
         cursor: pointer;
+        animation: boxShadownMove 0.3s;
+        animation-fill-mode: forwards;
     }
-</style>
-<div id="welcome-area">
+    </style>
+    <div id="welcome-area">
     <div id="central-area">
         <div id="banner">
             <h1> SNAKE GAME</h1>
@@ -192,5 +223,5 @@
             <button id="action-play"> PLAY</button>
         </div>
     </div>
-
-</div>
+    
+    </div>

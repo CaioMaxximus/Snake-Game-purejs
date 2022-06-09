@@ -23,10 +23,38 @@ export const templates = { startScreen :
 }
 
 
+@keyframes boxShadownMove {
+
+    0% {
+        box-shadow: 0px -5px 25px 3px purple;
+    }
+
+    15% {
+        box-shadow: 5px -12px 25px 5px purple;
+    }
+
+    50% {
+        box-shadow: 10px -17px 25px 5px purple;
+
+    }
+
+    65%{
+        box-shadow: 0px 0px 0px 0px purple;
+
+    }
+    100% {
+        background-color: purple;
+        border-radius: 8px;
+
+    }
+}
+
 @keyframes showBtn {
     from {
         opacity: 0;
-        background-color:rgb(49, 204, 2);
+        background-color: rgb(49, 204, 2);
+        box-shadow: 0px 0px 30px 30px purple;
+
     }
 
     to {
@@ -133,7 +161,7 @@ export const templates = { startScreen :
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: showBtn 1s ;
+    animation: showBtn 1s;
     animation-delay: 13s;
     animation-fill-mode: forwards;
 }
@@ -181,8 +209,11 @@ export const templates = { startScreen :
     animation-iteration-count: infinite;
 }
 
+
 #action-play:hover {
     cursor: pointer;
+    animation: boxShadownMove 0.3s;
+    animation-fill-mode: forwards;
 }
 </style>
 <div id="welcome-area">
