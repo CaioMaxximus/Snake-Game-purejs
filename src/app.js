@@ -6,7 +6,7 @@ import { getTemplates } from './fetch.js';
 import { templates } from './templates.js'
 
 let game_velocity = 300;
-const game_size = 12;
+const game_size = 10;
 let points = 0;
 
 const keys_enum = {
@@ -30,7 +30,16 @@ let getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
 let loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
 let winMusic = new Audio("../assets/");
 
+window.onload = () => boot();
 
+
+function boot() {
+    console.log("Carregando a tabela inicial do jogo", game_table_data);
+    // getTemplates();
+    spawnMenuScreen();
+    startMusic.play();
+}
+ 
 function resetData() {
 
     game_velocity = 300;
@@ -44,16 +53,12 @@ function resetData() {
     redDots = [0, 0];
     inGame = true;
     pointed = false;
+    startMusic = new Audio("../assets/New_Beginnings.mp3");
+    gameMusic = new Audio("../assets/Eric_Skiff_Underclocked.mp3");
+    getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
+    loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
+    winMusic = new Audio("../assets/");
 }
-
-function boot() {
-    console.log("Carregando a tabela inicial do jogo", game_table_data);
-    // getTemplates();
-    spawnMenuScreen();
-    startMusic.play();
-}
-window.onload = () => boot();
-
 
 
 function change_direction(key) {
