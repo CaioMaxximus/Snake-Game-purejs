@@ -6,7 +6,7 @@ import { getTemplates } from './fetch.js';
 import { templates } from './templates.js'
 
 let game_velocity = 300;
-const game_size = 10;
+const game_size = 16;
 let points = 0;
 
 const keys_enum = {
@@ -39,7 +39,7 @@ function boot() {
     spawnMenuScreen();
     startMusic.play();
 }
- 
+
 function resetData() {
 
     game_velocity = 300;
@@ -60,6 +60,11 @@ function resetData() {
     winMusic = new Audio("../assets/");
 }
 
+
+function changePoints(value) {
+    points += value;
+    document.getElementById("points").innerHTML = points;
+}
 
 function change_direction(key) {
 
@@ -97,6 +102,11 @@ function spawnMenuScreen() {
 
 }
 
+function spawnGameScreen() {
+    document.getElementById("templates").innerHTML = templates.gameScreen;
+
+}
+
 function spawnWinScreen() {
 
 }
@@ -105,7 +115,7 @@ function load_game_area() {
     for (var i = 0; i < game_size; i++) {
         var line = [];
         for (var j = 0; j < game_size; j++) {
-            let pixelP = new pixel(String(i) + String(j), "");
+            let pixelP = new pixel(String(i) + "-" + String(j), "");
             line.push(pixelP);
         }
         game_table_data.push(line);
@@ -118,7 +128,8 @@ function start_game() {
     controller.bind_keyboards(change_direction);
     redDots = generator.redDotsGenerator(player_data.body, game_table_data);
     console.log(redDots);
-    render.gameRender(game_table_data);
+    spawnGameScreen();
+    render.gameRender(game_table_data, "gameplay");
     startMusic.pause();
     gameMusic.play();
     gameCycle();
@@ -173,7 +184,10 @@ function gameRule(newBody, redDots) {
         case ("ok"):
             if (verifyPointsAquired(newBody, redDots)) {
                 pointed = true;
-                points += 1;
+                game_velocity -= 15
+                getItemMusic.play();
+                changePoints(1);
+
 
             }
             break;
@@ -230,22 +244,25 @@ function playing() {
     const playerDataCopy = JSON.parse(JSON.stringify(player_data));
     // console.log(String(playerDataCopy.body));
     // console.log(String(player_data.body));
-    console.log(JSON.stringify(player_data.body))
+    // console.log(JSON.stringify(player_data.body))
     player_data.body = controller.moveSnake(player_data.body, player_data.bodyDirections);
-    console.log(JSON.stringify(player_data.body))
+    // console.log(JSON.stringify(player_data.body))
 
     gameRule(player_data.body, redDots);
-
     if (pointed) {
-        console.log(playerDataCopy === player_data);
-        console.log(String(playerDataCopy.body));
-        console.log(String(player_data.body));
         addNewBodyPart(playerDataCopy, player_data);
         redDots = generator.redDotsGenerator(player_data.body, game_table_data);
         pointed = false;
-        game_velocity -= 15
-        getItemMusic.play();
-    } if (inGame) {
+
+    }
+
+    // if (pointed) {
+    //     console.log(playerDataCopy === player_data);
+    //     console.log(String(playerDataCopy.body));
+    //     console.log(String(player_data.body));
+
+    // }
+    if (inGame) {
         render_frame(playerDataCopy.body, player_data.body, game_table_data, redDots);
     }
     //setGameTable();

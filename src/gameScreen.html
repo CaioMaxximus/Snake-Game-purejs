@@ -1,0 +1,64 @@
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/8bit-wonder" type="text/css" />
+<style>
+    @font-face {
+        font-family: "bitWonder";
+        src: url("../assets/8-BITWONDER.TTF");
+    }
+
+    #game-area-total {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    #game-area-gameplay {
+        display: flex;
+        width: 60%;
+        height: 100%;
+
+    }
+
+    #gameplay {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    #game-area-points {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: solid 0.2em black;
+        background-color: rgb(248, 166, 230);
+        color: rgb(4, 182, 4);
+        font-family: bitWonder;
+        font-size: 1em;
+    }
+
+ 
+    #game-area-points span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
+
+<div id="game-area-total">
+    <div id="game-area-gameplay">
+        <div id="gameplay"> </div>
+        <div id="counter"></div>
+    </div>
+    <div id="game-area-points">
+        <span>
+            <h1 id="points">0</h1> points
+        </span>
+    </div>
+</div>
+</div>

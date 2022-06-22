@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/8bit-wonder" type="text/css"/>
 <style>
     :root {
         --BlueViolet: #8A2BE2;
@@ -5,47 +7,56 @@
         --Purple: #800080;
         --Yellow: #ffff19;
         --animation-time: 1s;
+        --background : #5647b4
     }
-    
-    
-    
+
+
+    /* @font-face {
+        font-family: bitWonder;
+        src: url("../assets/8-BIT/WONDER.TTF");
+    } */
+
+
+
+
     @keyframes move {
         from {
             transform: translateX(1000px);
         }
-    
+
         to {
             transform: translateX(-1000px);
         }
     }
-    
-    
+
+
     @keyframes boxShadownMove {
-    
+
         0% {
-            box-shadow: 0px -5px 25px 3px purple;
+            box-shadow: 0.1em -0.1em 5px purple;
         }
-    
+
         15% {
-            box-shadow: 5px -12px 25px 5px purple;
+            box-shadow: 0.30em -0.15em 25px purple;
         }
-    
+
         50% {
-            box-shadow: 10px -17px 25px 5px purple;
-    
+            box-shadow: 0.35em -0.6em 45px purple;
+
         }
-    
-        65%{
+
+        65% {
             box-shadow: 0px 0px 0px 0px purple;
-    
+
         }
+
         100% {
             background-color: purple;
             border-radius: 8px;
-    
+
         }
     }
-    
+
     @keyframes showBtn {
         from {
             opacity: 0;
@@ -53,76 +64,77 @@
             box-shadow: 0px 0px 30px 30px purple;
 
         }
-    
+
         to {
             opacity: 1;
             align-items: center;
         }
     }
-    
+
     @keyframes changeColorBanner {
-    
+
         0% {
             color: var(--BlueViolet);
         }
-    
+
         20% {
             color: var(--DarkOrchid);
         }
-    
+
         40%,
         100% {
             color: var(--Yellow);
         }
-    
+
     }
-    
+
     @keyframes changeColorDois {
-    
+
         0% {
-            background-color: var(--Purple);
-        }
-    
-        50% {
             background-color: var(--BlueViolet);
         }
-    
-        100% {
+
+        50% {
             background-color: var(--Purple);
-    
+
         }
-    
-    
+
+        100% {
+            background-color: var(--BlueViolet);
+
+        }
+
+
     }
-    
+
     @keyframes fadeAppearMenu {
         from {
             opacity: 0;
             box-shadow: 10em 10em 10em 10em black;
-    
+
         }
-    
+
         to {
             opacity: 1;
             box-shadow: none;
-    
+
         }
     }
-    
-    
+
+
     @keyframes esmaecer {
         from {
             background-color: rgba(238, 2, 2, 0.904);
-    
+
         }
-    
+
         100% {
             background-color: none;
         }
     }
-    
+
     #welcome-area {
-    
+
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -130,21 +142,20 @@
         height: 100%;
         /* background: rgb(20, 93, 139);
         background: linear-gradient(0deg, rgba(20, 93, 139, 1) 16%, rgba(32, 159, 217, 1) 95%); */
-        animation: changeColorDois var(--animation-time) 0s 13 backwards,
-            fadeAppearMenu 10s 0s normal;
-        /* animation: changeColorDois;
-        animation-duration: var(--animation-time);
-        animation-fill-mode: backwards;
-        animation-iteration-count: infinite; */
+
+        animation: changeColorDois var(--animation-time) 0s 13 forwards,
+            fadeAppearMenu 10s 0s normal; 
+
+   
         border-radius: 5px;
     }
-    
+
     /* #welcome-area{
         animation : esmaecer;
         animation-duration: 3s;
         animation-delay:6s;
     } */
-    
+
     #central-area {
         display: grid;
         width: 100%;
@@ -152,9 +163,9 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     #actions {
-        opacity: 0;
+        opacity: 1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -162,27 +173,30 @@
         animation-delay: 13s;
         animation-fill-mode: forwards;
     }
-    
+
     #actions-play {
         font-size: 30rem;
-    
+        margin-top: 3em;
+        
+
     }
-    
+
     #actions button {
         border: none;
         color: rgb(157, 233, 15);
         font-size: larger;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 3em;
         background: none;
-    
+        font-family: '8BITWONDERNominal';
+        font-size: 3em;
+
     }
-    
-    
+
+
     #banner {
         position: relative;
         display: flex;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+        font-family: bitWonder;
         font-size: 4em;
         animation: changeColorBanner 1.5s 13s 6 backwards,
             changeColorBanner 1s 9s infinite backwards;
@@ -190,12 +204,19 @@
     
         border-color: #12253c;
     }
-    
+
+
     #banner h1 {
         margin-bottom: 0px;
-        margin-top: 0px;
+        margin-top: 0px ;
+        font-family: '8BITWONDERNominal';
+        font-size: 0.9em;
+        text-align : center;
+        font-weight: normal;
+        font-style: normal;
+
     }
-    
+
     #snake-image {
         background-color: var(--color1);
         position: absolute;
@@ -205,15 +226,15 @@
         animation-fill-mode: forwards;
         animation-iteration-count: infinite;
     }
-    
-    
+
+
     #action-play:hover {
         cursor: pointer;
-        animation: boxShadownMove 0.3s;
+        animation: boxShadownMove 0.4s;
         animation-fill-mode: forwards;
     }
-    </style>
-    <div id="welcome-area">
+</style>
+<div id="welcome-area">
     <div id="central-area">
         <div id="banner">
             <h1> SNAKE GAME</h1>
@@ -223,5 +244,5 @@
             <button id="action-play"> PLAY</button>
         </div>
     </div>
-    
-    </div>
+
+</div>

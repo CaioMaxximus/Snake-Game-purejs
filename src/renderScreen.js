@@ -22,7 +22,7 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
             console.log(game_table_data[x][y]);
             game_table_data[y][x].notify(color) ;
         });
-    }
+    } 
 
     // onchangeRender:  function(){
 
