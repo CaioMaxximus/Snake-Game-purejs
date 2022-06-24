@@ -252,124 +252,159 @@ export const templates = {
         </div>`,
 
     loseScreen: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-
-:root{
-    --btn-background: rgb(167, 0, 125);
-    --btn-color : rgb(123, 199, 0);
-}
-
-@keyframes change-background-color {
-    0%{
-        background-color: #9603bb;
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+    
+    :root{
+        --btn-background: rgb(167, 0, 125);
+        --btn-color : rgb(123, 199, 0);
     }
-    40%{
-        background-color: #2e003b;
+    
+    
+    
+    @keyframes change-background-color {
+        0%{
+            background-color: #9603bb;
+        }
+        40%{
+            background-color: #2e003b;
+        }
+        100%{
+            background-color: #9603bb;
+        }
     }
-    100%{
-        background-color: #9603bb;
+    
+    #lose-screen{
+        margin: 10%  auto;
+        display: flex;
+        width: 70%;
+        border-radius: 10px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        animation: change-background-color 1s forwards infinite ;
+        color: yellow;
+        font-family: bitWonder;
+    
     }
-}
-
-#lose-screen{
-    margin: 10%  auto;
-    display: flex;
-    width: 70%;
-    border-radius: 10px;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    animation: change-background-color 1s forwards infinite ;
-    color: yellow;
-}
-
-.btn-zone{
-    display: flex;
-    flex-direction: column;
-    column-gap: 3em;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-zone button{
-    width: 50%;
-    max-width: 10em;
-    min-height: 4em;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 10px;
-    color: var(--btn-color);
-    background-color: var(--btn-background);
-}
-
-.btn-zone button:hover{
-    border: solid 2px black;
-    color: var(--btn-background);
-    background-color: var(--btn-color);
-}
-
-</style>
-<body>
-    <div id = lose-screen>
-        <h1>YOU LOSE!</h1>
-        <h3 id = points> <span id = final-points></span> POINTS</h3>
-        <div class = "btn-zone">
-            <button id="play-again-btn" onclick="">
-                PLAY AGAIN
-            </button>
-            <button id = "go-menu-btn">
-                MENU
-            </button>
+    
+    .btn-zone{
+        display: flex;
+        flex-direction: column;
+        column-gap: 3em;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-zone button{
+        width: 50%;
+        max-width: 10em;
+        min-height: 4em;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+        color: var(--btn-color);
+        background-color: var(--btn-background);
+        font-family: bitWonder;
+    }
+    
+    .btn-zone button:hover{
+        border: solid 2px black;
+        color: var(--btn-background);
+        background-color: var(--btn-color);
+    }
+    
+    </style>
+    <body>
+        <div id = lose-screen>
+            <h1>YOU LOSE!</h1>
+            <h3 id = points> <span id = final-points></span> POINTS</h3>
+            <div class = "btn-zone">
+                <button id="play-again-btn" onclick="">
+                    PLAY AGAIN
+                </button>
+                <button class = "go-menu-btn">
+                    MENU
+                </button>
+            </div>
         </div>
-    </div>
-</body>
-</html>`,
-    winScreen: `
-
-<style>
-
-@keyframes change-background-color {
-    0%{
-        background-color: blueviolet;
+    </body>
+    </html>
+    `,
+    winScreen: `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+    
+    @keyframes change-background-color {
+        0%{
+            background-color: rgb(92, 184, 17);
+        }
+        40%{
+            background-color: rgb(182, 68, 144);
+        }
+        100%{
+            background-color:rgb(92, 184, 17);
+        }
     }
-    40%{
-        background-color: red;
+    
+    #win-screen{
+        margin: 10%  auto;
+        display: flex;
+        width: 70%;
+        border-radius: 10px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        font-family: bitWonder;
+        animation: change-background-color 1s forwards infinite ;
+        color: yellow;
     }
-    100%{
-        background-color: blueviolet;
+    
+    .btn-zone button{
+        width: 50%;
+        max-width: 10em;
+        min-height: 4em;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+        color: var(--btn-color);
+        background-color: var(--btn-background);
+        font-family: bitWonder;
     }
-}
-
-#win-screen{
-    margin: 10%  auto;
-    display: flex;
-    width: 70%;
-    border-radius: 10px;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    animation: change-background-color 1s forwards infinite ;
-    color: yellow;
-}
-
-
-
-</style>
-<body>
-    <div id = win-screen>
-        <h1>CONGRATULATIONS!</h1> 
-        <h2>You Win!</h2> 
-    </div>
-</body>
-</html>
-`,
+    
+    .btn-zone button:hover{
+        border: solid 2px black;
+        color: var(--btn-background);
+        background-color: var(--btn-color);
+    }
+    
+    
+    
+    </style>
+    <body>
+        <div id = win-screen>
+            <h1>CONGRATULATIONS!</h1> 
+            <h2>You Win!</h2> 
+            <div class = "btn-zone">
+                <button class = "go-menu-btn">
+                    MENU
+                </button>
+            </div>
+        </div>
+    </body>
+    </html>`,
     gameScreen : `<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/8bit-wonder" type="text/css" />
     <style>
         @font-face {
@@ -413,7 +448,7 @@ export const templates = {
             font-size: 1em;
         }
     
-    
+     
         #game-area-points span {
             display: flex;
             align-items: center;

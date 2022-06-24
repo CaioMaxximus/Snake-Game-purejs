@@ -16,9 +16,7 @@ const generator ={
                 freePos = true
                 return [y ,x]
             }
-            if(y == 10 || x == 10){
-                window.alert("10");
-            }
+
         }
         
     }

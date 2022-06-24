@@ -8,6 +8,7 @@ import { templates } from './templates.js'
 let game_velocity = 300;
 const game_size = 16;
 let points = 0;
+const points_to_win = 2;
 
 const keys_enum = {
     'w': 'up',
@@ -89,8 +90,8 @@ function spwanLoseScreen() {
 
     document.getElementById("templates").innerHTML = templates.loseScreen;
     document.getElementById("final-points").innerHTML = points
-    document.getElementById("go-menu-btn").addEventListener("click", boot);
-    document.getElementById("play-again-btn").addEventListener("click", start_game);
+    document.getElementById("play-again-btn").addEventListener("click" , start_game);
+    document.getElementsByClassName("go-menu-btn")[0].addEventListener("click", boot);
     resetData();
 
 }
@@ -109,6 +110,9 @@ function spawnGameScreen() {
 
 function spawnWinScreen() {
 
+    document.getElementById("templates").innerHTML = templates.winScreen;
+    document.getElementsByClassName("go-menu-btn")[0].addEventListener("click", boot);
+    resetData();
 }
 
 function load_game_area() {
@@ -154,8 +158,12 @@ async function gameCycle() {
         console.log("game_rule");
         console.log(points
         );
-
-        if (inGame) {
+        if (points_to_win === points) {
+            gameMusic.pause();
+            spawnWinScreen();
+            break;
+        }
+        else if (inGame) {
             await sleep(game_velocity);
             playing();
         }
