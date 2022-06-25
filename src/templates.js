@@ -412,6 +412,7 @@ export const templates = {
             src: url("../assets/8-BITWONDER.TTF");
         }
     
+    
         #game-area-total {
             width: 100%;
             height: 100%;
@@ -425,6 +426,7 @@ export const templates = {
             display: flex;
             width: 60%;
             height: 100%;
+            position: relative;
     
         }
     
@@ -455,12 +457,26 @@ export const templates = {
             justify-content: center;
             flex-direction: column;
         }
+    
+        #counter{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-family: bitWonder;
+            font-size: 4.5em;
+            display: flex;
+            align-items: center ;
+            justify-content: center;
+            background-color: rgb(253, 210, 169);
+            
+        }
+    
     </style>
     
     <div id="game-area-total">
         <div id="game-area-gameplay">
             <div id="gameplay"> </div>
-            <div id="counter"></div>
+            <div id="counter">2</div>
         </div>
         <div id="game-area-points">
             <span>
@@ -468,5 +484,5 @@ export const templates = {
             </span>
         </div>
     </div>
-    </div>`    
+    </div> vb`    
 }

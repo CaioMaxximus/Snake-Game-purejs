@@ -30,6 +30,7 @@ let gameMusic = new Audio("../assets/Eric_Skiff_Underclocked.mp3");
 let getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
 let loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
 let winMusic = new Audio("../assets/");
+let bipMusic = new Audio("../assets/Video Game Beep - Sound Effect (320 kbps).mp3");
 
 window.onload = () => boot();
 
@@ -59,6 +60,8 @@ function resetData() {
     getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
     loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
     winMusic = new Audio("../assets/");
+    bipMusic = new Audio("../assets/Video Game Beep - Sound Effect (320 kbps).mp3");
+
 }
 
 
@@ -126,17 +129,33 @@ function load_game_area() {
     }
 }
 
-function start_game() {
+async function start_game() {
     console.log("start")
     load_game_area();
     controller.bind_keyboards(change_direction);
     redDots = generator.redDotsGenerator(player_data.body, game_table_data);
     console.log(redDots);
-    spawnGameScreen();
-    render.gameRender(game_table_data, "gameplay");
     startMusic.pause();
+    spawnGameScreen();
+    await spawnTimerScreen();
+    render.gameRender(game_table_data, "gameplay");
     gameMusic.play();
     gameCycle();
+}
+
+async function spawnTimerScreen(){
+    
+    let $counter = document.getElementById("counter");
+    for (let i = 2; i > 0; i --){
+        $counter.innerHTML =  i;
+        bipMusic.play();
+        // while(!bipMusic.paused){
+        // }
+        await sleep(1000)
+    }
+
+    $counter.style.display = "none"
+    
 }
 
 
