@@ -3,13 +3,14 @@ import { controller } from './controler.js';
 import { generator } from './elementsGenerator.js';
 import { pixel } from './PixelObserver.js';
 import { getTemplates } from './fetch.js';
-import { templates } from './templates.js'
+import { tmplts } from './templates.js'
 
 let game_velocity = 300;
 const game_size = 16;
 let points = 0;
-const points_to_win = 2;
-
+const points_to_win = 18;
+let templates ;
+ 
 const keys_enum = {
     'w': 'up',
     'a': 'lf',
@@ -26,20 +27,27 @@ let redDots = [0, 0];
 let inGame = true;
 let pointed = false;
 let startMusic = new Audio("../assets/New_Beginnings.mp3");
-let gameMusic = new Audio("../assets/Eric_Skiff_Underclocked.mp3");
+let gameMusic = new Audio("../assets/Eric_Skiff_Underclocked_cuted.mp3");
 let getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
 let loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
 let winMusic = new Audio("../assets/");
 let bipMusic = new Audio("../assets/Video Game Beep - Sound Effect (320 kbps).mp3");
 
-window.onload = () => boot();
+window.onload = () => preBoot();
 
+
+async function  preBoot()
+{
+    templates= await tmplts()
+    boot();
+}
 
 function boot() {
     console.log("Carregando a tabela inicial do jogo", game_table_data);
     // getTemplates();
     spawnMenuScreen();
     startMusic.play();
+    getTemplates();
 }
 
 function resetData() {
@@ -56,7 +64,7 @@ function resetData() {
     inGame = true;
     pointed = false;
     startMusic = new Audio("../assets/New_Beginnings.mp3");
-    gameMusic = new Audio("../assets/Eric_Skiff_Underclocked.mp3");
+    gameMusic = new Audio("../assets/Eric_Skiff_Underclocked_cuted.mp3");
     getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
     loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
     winMusic = new Audio("../assets/");
@@ -187,6 +195,7 @@ async function gameCycle() {
             playing();
         }
         else {
+            
             loseMusic.play();
             gameMusic.pause();
             await sleep(1000);
