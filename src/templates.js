@@ -13,6 +13,7 @@ async function fetchTemplate(url){
 
 
 export const tmplts =
+ 
     (async function (){
         let baseUrl = "http://localhost:5501/src/";
         let startScreen = await fetchTemplate(baseUrl + "startScreen.html");

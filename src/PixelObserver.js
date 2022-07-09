@@ -1,41 +1,46 @@
 
-const pixel = function pixel(id, color) {
-    const myId = id;
-    
-    // if(!isColor(color)){
-    //     throw `Error : Invalid color atribute - ${color}`
-    // }
-    let myColor = color;
+const pixel = function pixel(id, path) {
+    // function isImageValid(path){
+    //     console.log(path)
+    //     let $ele = document.createElement("div");
+    //     $ele.style.backgroundImage =`url(${path})`;
+    //     if($ele.style.backgroundImage === ''){
+    //         return false;
+    //     }
+    //     return true;
+    // };
+    console.log(path)
 
-    function isColor(color){
-        let $ele = document.createElement("div");
-        $ele.style.color =color;
-        if($ele.style.color === ''){
-            return false;
-        }
-        return true;
-    };
+    // if(!isImageValid(path)){
+    //      throw `Error : Invalid path atribute - ${path}`
+    // }
+    const myId = id;
+    let myPath = path;
+
+
 
     return {
-        notify: (color) => {
+        notify: (path) => {
             let e = document.getElementById(`${myId}`);
             if(e === null){
                 throw `Error : Element id didn't find in DOM - ${myId}`
             }
-            // if(!isColor(color)){
-            //     throw `Error : Invalid color atribute - ${color}`
+            // if(!isImageValid(path)){
+            //     throw `Error : Invalid path image atribute - ${path}`
             // }
-            e.style.backgroundImage = `url(${color})`;
-            myColor = color;
-            console.log(myId, "mudando..", color);
+            e.style.backgroundImage = `url(${path})`;
+            myPath = path;
+            console.log(myId, "mudando..", path);
         },
-        getColor: () => {
-            return myColor;
+        getPath: () => {
+            return myPath;
         },
         getId: () => {
             return myId;
         }
     }
 };
+
+window.pixel = pixel
 
 export { pixel };

@@ -4,6 +4,7 @@ import { generator } from './elementsGenerator.js';
 import { pixel } from './PixelObserver.js';
 import { getTemplates } from './fetch.js';
 import { tmplts } from './templates.js'
+'use strict';
 
 let game_velocity = 300;
 const game_size = 16;
@@ -174,6 +175,10 @@ function render_frame(oldBody, newBody, game_table_data, redDots) {
 
 }
 
+function renderPositions(pos, path){
+    render.notify(pos , path, game_table_data);
+}
+
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
@@ -195,7 +200,7 @@ async function gameCycle() {
             playing();
         }
         else {
-            
+
             loseMusic.play();
             gameMusic.pause();
             await sleep(1000);
@@ -278,11 +283,7 @@ function playing() {
     console.log("playing");
     controller.controlDirections(actual_direction, player_data.bodyDirections);
     const playerDataCopy = JSON.parse(JSON.stringify(player_data));
-    // console.log(String(playerDataCopy.body));
-    // console.log(String(player_data.body));
-    // console.log(JSON.stringify(player_data.body))
     player_data.body = controller.moveSnake(player_data.body, player_data.bodyDirections);
-    // console.log(JSON.stringify(player_data.body))
 
     gameRule(player_data.body, redDots);
     if (pointed) {
@@ -292,18 +293,17 @@ function playing() {
 
     }
 
-    // if (pointed) {
-    //     console.log(playerDataCopy === player_data);
-    //     console.log(String(playerDataCopy.body));
-    //     console.log(String(player_data.body));
-
-    // }
+    
     if (inGame) {
         render_frame(playerDataCopy.body, player_data.body, game_table_data, redDots);
     }
-    //setGameTable();
-    //generator.redDotsGenerator(game_table_data, game_size , player_data.body , player_data.bodyDirections);
-    // render.gameRender(game_table _data);
+    else{
+        if(player_data.body.length > 1){
+            renderPositions(playerDataCopy.body, "../skull_icon.png")
+
+        }
+    }
+
     console.log(player_data.bodyDirections);
 }
 

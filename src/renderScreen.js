@@ -16,12 +16,16 @@ const render = {gameRender : function(game_table_data, domContainer =  "template
     },
      notify: function (list , color, game_table_data) {
         console.log(list);      
-        list.forEach(element => {
-            let x = element[1];
-            let y = element[0];
-            console.log(game_table_data[x][y]);
-            game_table_data[y][x].notify(color) ;
-        });
+        try{
+            list.forEach(element => {
+                let x = element[1];
+                let y = element[0];
+                console.log(game_table_data[x][y]);
+                game_table_data[y][x].notify(color) ;
+            });
+        }catch{
+            console.log("e")
+        }
     } 
 
     // onchangeRender:  function(){

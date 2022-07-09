@@ -19,35 +19,37 @@ describe("Testando pixelObserver", function () {
 
     // console.log(p);
     // console.log("it");  
-    let pix = new pixel('00', "green");
-
-    it("Deve lançar uma excecao caso um elemento com cor invalido seja criado", () => {
-        expect(() => new pixel("id", "")).to.throw();
-        expect(() => new pixel("id", "---")).to.throw();
-        expect(() => new pixel("id", "#00000000000")).to.throw();
-        expect(() => new pixel("id", "rgb(0,x)")).to.throw();
-        expect(() => new pixel("id", "rgb(0,1)")).to.throw();
+    let path = 'test_image.png';
+    let pix = new pixel('00', path);
 
 
-    });
+    // it("Deve lançar uma excecao caso um elemento com um caminho inválido seja criado", () => {
+    //     expect(() => new pixel("id", "")).to.throw();
+    //     expect(() => new pixel("id", "---")).to.throw();
+    //     expect(() => new pixel("id", "/.-cz")).to.throw();
+
+
+    // });
     it("Deve criar um objeto valido que retorna os atributos nos getters", () => {
         expect(pix.getId()).to.be.equal('00');
-        expect(pix.getColor()).to.be.equal("green");
+        expect(pix.getPath()).to.be.equal(path);
     });
-
-    it("notify() deve mudar a cor de um elemento do elemento no DOM ", () => {
+''
+    it("notify() deve mudar a imagem de um elemento do elemento no DOM ", () => {
         let $newDiv = document.createElement("div");
         $newDiv.id = "00";
         document.getElementById("templates").appendChild($newDiv);
-        pix.notify("rgb(255, 192, 203)");
-        let $color = getComputedStyle(document.getElementById("00")).backgroundColor;
+        pix.notify(path);
+        let $e =  document.getElementById("00");
+        let $image =  $e.style.backgroundImage;
+        console.log($image)
 
-        expect($color).to.be.equal("rgb(255, 192, 203)");
+        expect($image).to.be.equal(`url(\"${path}\")`);
+        let path2 = "test_image_2.png"
+        pix.notify(path2);
+        $image = document.getElementById("00").style.backgroundImage;
 
-        pix.notify("rgb(100,100,100)");
-        $color = getComputedStyle(document.getElementById("00")).backgroundColor;
-
-        expect($color).to.be.equal("rgb(100, 100, 100)");
+        expect($image).to.be.equal(`url(\"${path2}\")`);
 
         $newDiv.remove();
 
@@ -56,18 +58,18 @@ describe("Testando pixelObserver", function () {
         let pix = new pixel("ab", "blue");
         expect(() => { pix.notify("rgb(0,0,0)") }).to.throw();
     });
-    it("notify() deve lançar uma execeção se um valor inválido de cor for passado", () => {
+    // it("notify() deve lançar uma execeção se um valor inválido de cor for passado", () => {
 
-        let pix = new pixel("00", "red");
-        let $ele = document.createElement("div");
-        $ele.id = "00";
-        document.getElementById("templates").appendChild($ele);
+    //     let pix = new pixel("00", "red");
+    //     let $ele = document.createElement("div");
+    //     $ele.id = "00";
+    //     document.getElementById("templates").appendChild($ele);
 
-        expect(()=> pix.notify("")).to.throw();
-        expect(()=> pix.notify()).to.throw();
-        expect(()=> pix.notify("...")).to.throw();
-        expect(()=> pix.notify("rgb(0,0)")).to.throw();
-    });
+    //     expect(()=> pix.notify("")).to.throw();
+    //     expect(()=> pix.notify()).to.throw();
+    //     expect(()=> pix.notify("...")).to.throw();
+    //     expect(()=> pix.notify("rgb(0,0)")).to.throw();
+    // });
 
 
 
