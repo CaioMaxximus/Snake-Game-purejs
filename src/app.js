@@ -10,8 +10,8 @@ let game_velocity = 300;
 const game_size = 16;
 let points = 0;
 const points_to_win = 18;
-let templates ;
- 
+let templates;
+
 const keys_enum = {
     'w': 'up',
     'a': 'lf',
@@ -20,6 +20,7 @@ const keys_enum = {
 };
 let game_table_data = [];
 let actual_direction = "up";
+let next_direction = "up";
 let player_data = {
     body: [[game_size / 2, game_size / 2]],
     bodyDirections: ["lf"]
@@ -33,13 +34,13 @@ let getItemMusic = new Audio("../assets/8_bit_Coin_Sound_Effect.mp3");
 let loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
 let winMusic = new Audio("../assets/");
 let bipMusic = new Audio("../assets/Video Game Beep - Sound Effect (320 kbps).mp3");
+let clickMusic = new Audio("../assets/MenuGameButtonClickSoundEffect.mp3");
 
 window.onload = () => preBoot();
 
 
-async function  preBoot()
-{
-    templates= await tmplts()
+async function preBoot() {
+    templates = await tmplts()
     boot();
 }
 
@@ -70,6 +71,8 @@ function resetData() {
     loseMusic = new Audio("../assets/8_bit_error_Gaming_sound_effect_HD.mp3");
     winMusic = new Audio("../assets/");
     bipMusic = new Audio("../assets/Video Game Beep - Sound Effect (320 kbps).mp3");
+    clickMusic = new Audio("../assets/MenuGameButtonClickSoundEffect.mp3");
+    next_direction = "up";
 
 }
 
@@ -90,7 +93,7 @@ function change_direction(key) {
             r === "rt" && actual_direction !== "lf" ||
             r === "up" && actual_direction !== "dw" ||
             r === "dw" && actual_direction !== "up") {
-            actual_direction = r;
+            next_direction = r;
             console.log(actual_direction, "changes actualDirection")
 
         }
@@ -98,12 +101,24 @@ function change_direction(key) {
     console.log("changed", key);
 }
 
+function playClickSound() {
+    return clickMusic.play()  ;
+}
+
 function spwanLoseScreen() {
 
     document.getElementById("templates").innerHTML = templates.loseScreen;
     document.getElementById("final-points").innerHTML = points
-    document.getElementById("play-again-btn").addEventListener("click" , start_game);
-    document.getElementsByClassName("go-menu-btn")[0].addEventListener("click", boot);
+    document.getElementById("play-again-btn").addEventListener("click",  async function(){
+        playClickSound();
+        await sleep(500);
+        start_game();
+    });
+    document.getElementsByClassName("go-menu-btn")[0].addEventListener("click",  async function(){
+        playClickSound();
+        await sleep(500);
+        boot();
+    });
     resetData();
 
 }
@@ -111,7 +126,11 @@ function spwanLoseScreen() {
 function spawnMenuScreen() {
     document.getElementById("templates").innerHTML = templates.startScreen;
     let $play_link = document.getElementById("action-play");
-    $play_link.addEventListener("click", start_game);
+    $play_link.addEventListener("click", async function() { 
+        playClickSound();
+        await sleep(500);
+        start_game() ;
+    });
 
 }
 
@@ -152,11 +171,11 @@ async function start_game() {
     gameCycle();
 }
 
-async function spawnTimerScreen(){
-    
+async function spawnTimerScreen() {
+
     let $counter = document.getElementById("counter");
-    for (let i = 2; i > 0; i --){
-        $counter.innerHTML =  i;
+    for (let i = 2; i > 0; i--) {
+        $counter.innerHTML = i;
         bipMusic.play();
         // while(!bipMusic.paused){
         // }
@@ -164,7 +183,7 @@ async function spawnTimerScreen(){
     }
 
     $counter.style.display = "none"
-    
+
 }
 
 
@@ -175,13 +194,14 @@ function render_frame(oldBody, newBody, game_table_data, redDots) {
 
 }
 
-function renderPositions(pos, path){
-    render.notify(pos , path, game_table_data);
+function renderPositions(pos, path) {
+    render.notify(pos, path, game_table_data);
 }
 
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
+
 
 
 async function gameCycle() {
@@ -281,6 +301,7 @@ function addNewBodyPart(player_data_old, player_data) {
 
 function playing() {
     console.log("playing");
+    actual_direction = next_direction;
     controller.controlDirections(actual_direction, player_data.bodyDirections);
     const playerDataCopy = JSON.parse(JSON.stringify(player_data));
     player_data.body = controller.moveSnake(player_data.body, player_data.bodyDirections);
@@ -293,12 +314,12 @@ function playing() {
 
     }
 
-    
+
     if (inGame) {
         render_frame(playerDataCopy.body, player_data.body, game_table_data, redDots);
     }
-    else{
-        if(player_data.body.length > 1){
+    else {
+        if (player_data.body.length > 1) {
             renderPositions(playerDataCopy.body, "../skull_icon.png")
 
         }
