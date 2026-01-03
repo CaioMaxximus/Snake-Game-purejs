@@ -1,13 +1,12 @@
 # Snake Game (Vanilla JavaScript)
 
-A classic Snake game built with pure JavaScript, HTML and CSS — no frameworks or libraries.
+A classic Snake game built with pure JavaScript, HTML and CSS — no frameworks or libraries, for study porpuse.
 
 ## Features
 - Classic grid-based Snake gameplay
-- Keyboard controls (arrow keys)
+- Keyboard controls
 - Score tracking
 - Game over detection and restart
-- Simple, dependency-free code ideal for learning game loop and DOM techniques
 
 ## Tech stack
 - JavaScript (ES6+)
